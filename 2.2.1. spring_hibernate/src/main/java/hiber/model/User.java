@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 public class User {
-   @OneToOne
+   @OneToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "car_id")
    private Car car;
 
@@ -39,10 +39,8 @@ public class User {
    }
 
    public User(String firstName, String lastName, String email, Car car) {
+      this(firstName, lastName,email);
       this.car = car;
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.email = email;
    }
 
    public Long getId() {
@@ -75,5 +73,15 @@ public class User {
 
    public void setEmail(String email) {
       this.email = email;
+   }
+
+   @Override
+   public String toString() {
+      return "User{" +
+              "car=" + car +
+              ", firstName='" + firstName + '\'' +
+              ", lastName='" + lastName + '\'' +
+              ", email='" + email + '\'' +
+              '}';
    }
 }
